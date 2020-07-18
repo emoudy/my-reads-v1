@@ -15,7 +15,7 @@ class Search extends Component {
   clearQuery = () => {
     this.updateQuery('')
   }
-  
+
 	updateQuery = (query) => {
     this.setState(() => ({
       query: query.trim()
@@ -54,6 +54,7 @@ class Search extends Component {
         </div>
 
 	      <div className = "book-shelf">
+	      <h2>Search Results</h2>
 		      {searchResults.length !== books.length && (
 		      	<div className='showing-books'>
 			      	<span>Now showing {searchResults.length} of {books.length}</span>
@@ -68,7 +69,7 @@ class Search extends Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks? `url(${book.imageLinks.thumbnail})`: '' }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select>
+                      <select value = {book.shelf}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
