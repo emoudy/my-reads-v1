@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import MyReads from './MyReads'
+import * as BooksAPI from './BooksAPI'
+import './App.css'
+import { Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class BooksApp extends React.Component {
+
+  state = {
+     books: []
+  }
+
+  componentDidMount(){
+    BooksAPI.getAll()
+    // .then((books) => {
+    //   this.setState(() => ({
+    //     books
+    //   }))
+    // })
+  }
+
+  updateCategory(){
+    // BooksAPI.update()
+    // .then((books) => {
+    //   this.setState(() => ({
+    //     books
+    //   }))
+    // })
+  }
+
+  render() {
+    return (
+  //MyReads Main
+      //<div>
+        <Route exact path='/' render={() => (
+          <MyReads>
+            books = {this.state.books}
+          </MyReads>
+            //updateCategory = {this.state.books}
+        )} />
+
+    //Search Button
+      //   <Route exact path='/search' render={({history}) => (
+      //     <SearchPage
+      //       updateCategory = {this.state.books}
+      //       onHomePage = history.push('/') 
+      //     ></SearchPage>
+      //   )} />
+      //</div>
+    );
+  }
 }
 
-export default App;
+export default BooksApp
