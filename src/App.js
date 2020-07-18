@@ -1,5 +1,6 @@
 import React from 'react'
 import MyReads from './MyReads'
+import Search from './Search'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Route } from "react-router-dom";
@@ -11,12 +12,17 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount(){
+    console.log(BooksAPI.get('sJf1vQAACAAJ'))
     BooksAPI.getAll()
-    // .then((books) => {
-    //   this.setState(() => ({
-    //     books
-    //   }))
-    // })
+    .then((books) => {
+      this.setState(() => ({
+        books
+      }))
+    })
+  }
+
+  searchBookShelves = (title) => {
+    BooksAPI.search(title)
   }
 
   updateCategory(){
@@ -30,23 +36,26 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-  //MyReads Main
-      //<div>
+       <div>
         <Route exact path='/' render={() => (
-          <MyReads>
+          <MyReads
             books = {this.state.books}
-          </MyReads>
+            // onSearch = {(title) => {
+            //   this.searchBookShelves(title)
+            // }}
+          ></MyReads>
             //updateCategory = {this.state.books}
         )} />
 
-    //Search Button
-      //   <Route exact path='/search' render={({history}) => (
-      //     <SearchPage
-      //       updateCategory = {this.state.books}
-      //       onHomePage = history.push('/') 
-      //     ></SearchPage>
-      //   )} />
-      //</div>
+        <Route exact path='/search' render={() => (
+          <Search
+            books = {this.state.books}
+            //updateCategory = {this.state.books}
+            //onHomePage = history.push('/') 
+          ></Search>
+        )} />
+
+      </div>
     );
   }
 }
