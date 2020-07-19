@@ -2,38 +2,31 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
 // import ImageInput from './ImageInput'
-// import serializeForm from 'form-serialize'
- import { Link } from "react-router-dom";
- //BrowserRouter as Router, Route, 
+ import serializeForm from 'form-serialize'
+ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+ // 
 
 class MyReads extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onChangeShelf : PropTypes.func.isRequired
   }
 
   state = {
     shelf: ''
   }
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   const values = serializeForm(e.target, { hash: true })
-
-  //   if (this.props.onCreateContact) {
-  //     this.props.onCreateContact(values)
-  //   }
-  // }
-
-
-  clearQuery = () => {
-    this.updateQuery('')
+  handleChange = (e) => {
+    e.preventDefault()
+    const values = serializeForm(e.target, { hash: true })
+    this.props.onChangeShelf({shelf: e.target.value})
   }
 
 
   render(){
 
-    const { books } = this.props
-    const { query } = this.state
+    const { books, onChangeShelf } = this.props
+    const { shelf } = this.state
 
     const currentlyReadingShelf = books === ''
       ? books
@@ -75,7 +68,9 @@ class MyReads extends Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks? `url(${book.imageLinks.thumbnail})`: '' }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select value = {book.shelf} onChange = {(event) => this.props.onChangeShelf(book, event.target.value)}>
+                      <select 
+                        defaultValue = {book.shelf} 
+                        onChange = {(event) => this.handleChange}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

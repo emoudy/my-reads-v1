@@ -3,7 +3,7 @@ import MyReads from './MyReads'
 import Search from './Search'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import { Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class BooksApp extends React.Component {
 
@@ -20,11 +20,13 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateBook(id, newShelf){
-    BooksAPI.update(BooksAPI.get(id), newShelf)
-    // .then((book) => {
-    //   this.setState(newShelf)
-    // })
+  updateShelf = (book) => {
+    this.setState((currentState) => ({
+      books: currentState.books.filter((b) => {
+        return b.shelf != book.shelf
+      })
+    }))
+    BooksAPI.update(book, this.state.book.shelf)
   }
 
   render() {
@@ -33,7 +35,7 @@ class BooksApp extends React.Component {
         <Route exact path='/' render={() => (
           <MyReads
             books = {this.state.books}
-            onChangeShelf = {this.updateBook}
+            onChangeShelf = {this.updateShelf}
           ></MyReads>
         )} />
 

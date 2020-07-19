@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Search extends Component {
+  // handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   const values = serializeForm(e.target, { hash: true })
+  //   }
+  // }
+
   static propTypes = {
     books: PropTypes.array.isRequired,
   }
