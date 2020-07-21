@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Search extends Component {
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   const values = serializeForm(e.target, { hash: true })
-  //   }
-  // }
 
   static propTypes = {
     books: PropTypes.array.isRequired,
+    onShelfChange : PropTypes.func.isRequired
   }
 
   state = {
@@ -23,6 +19,7 @@ class Search extends Component {
   }
 
 	updateQuery = (query) => {
+    console.log('updateQuery happened');
     this.setState(() => ({
       query: query.trim()
     }))
@@ -30,7 +27,7 @@ class Search extends Component {
 
 	render(){
 		const { query } = this.state
-		const { books } = this.props
+		const { books, onShelfChange } = this.props
 
 		const searchResults = query === ''
       ? books
@@ -75,7 +72,9 @@ class Search extends Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks? `url(${book.imageLinks.thumbnail})`: '' }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select value = {book.shelf}>
+                      <select 
+                        defaultValue = {book.shelf}
+                        onChange = {(event) => onShelfChange(book, event.target.value)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

@@ -2,31 +2,19 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
 // import ImageInput from './ImageInput'
- import serializeForm from 'form-serialize'
- import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import serializeForm from 'form-serialize'
+ import { Link } from "react-router-dom";
  // 
 
 class MyReads extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
-    onChangeShelf : PropTypes.func.isRequired
+    //books: PropTypes.array.isRequired,
+    onShelfChange : PropTypes.func.isRequired
   }
-
-  state = {
-    shelf: ''
-  }
-
-  handleChange = (e) => {
-    e.preventDefault()
-    const values = serializeForm(e.target, { hash: true })
-    this.props.onChangeShelf({shelf: e.target.value})
-  }
-
 
   render(){
 
-    const { books, onChangeShelf } = this.props
-    const { shelf } = this.state
+    const { books, onShelfChange } = this.props
 
     const currentlyReadingShelf = books === ''
       ? books
@@ -49,7 +37,7 @@ class MyReads extends Component {
 
     return(
       <div>
-        
+
         <div className = "topnav">
           <h1>MyReads</h1>
           <Link
@@ -69,8 +57,8 @@ class MyReads extends Component {
                     </div>
                     <div className="book-shelf-changer">
                       <select 
-                        defaultValue = {book.shelf} 
-                        onChange = {(event) => this.handleChange}>
+                        defaultValue = {book.shelf}
+                        onChange = {(event) => onShelfChange(book, event.target.value)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
@@ -98,7 +86,9 @@ class MyReads extends Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks? `url(${book.imageLinks.thumbnail})`: '' }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select value = {book.shelf} onChange = {(event) => this.updateBook(event.target.value)}>
+                      <select 
+                        defaultValue = {book.shelf}
+                        onChange = {(event) => onShelfChange(book, event.target.value)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
@@ -126,7 +116,9 @@ class MyReads extends Component {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks? `url(${book.imageLinks.thumbnail})`: '' }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select value = {book.shelf} onChange = {(event) => this.updateBook(event.target.value)}>
+                      <select 
+                        defaultValue = {book.shelf}
+                        onChange = {(event) => onShelfChange(book, event.target.value)}>
                         <option value="move" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
