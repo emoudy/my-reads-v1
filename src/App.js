@@ -17,17 +17,18 @@ class BooksApp extends React.Component {
       this.setState(() => ({
         books
       }))
-    })
+    });
     console.log('componentDidMount happened');
   }
 
   updateShelf = (book, newShelf) => {
     this.setState({shelf: newShelf}, () => {
+      BooksAPI.update(book, newShelf);
       console.log('setState happened');
-    });
-    BooksAPI.update(book, newShelf)
+      return BooksAPI.getAll().then(data => this.setState({ books: data }))
+    })
+    console.log('BooksAPI happened');
     this.forceUpdate();
-    console.log('updateShelf happened');
   }
 
   render() {
