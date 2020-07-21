@@ -22,7 +22,9 @@ class BooksApp extends React.Component {
   }
 
   updateShelf = (book, newShelf) => {
-    this.setState ({ book: newShelf });
+    this.setState({shelf: newShelf}, () => {
+      console.log('setState happened');
+    });
     BooksAPI.update(book, newShelf)
     this.forceUpdate();
     console.log('updateShelf happened');
