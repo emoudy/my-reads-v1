@@ -1,4 +1,4 @@
-This project is my first React project.  The course Specifications were given by Udacity under their React course.
+This is my first React project.  The course Specifications were given by Udacity under their React course.
 
 # To Run and Install
 Should only require `npm install` and `npm start` to install and launch.
