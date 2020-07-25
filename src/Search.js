@@ -57,8 +57,8 @@ class Search extends Component {
         </div>
 
 	      <div className = "book-shelf">
-	      <h2>Search Results</h2>
-		      {searchResults.length !== books.length && (
+          <h2>Search Results</h2>
+		        {searchResults.length !== books.length && (
 		      	<div className='showing-books'>
 			      	<span>Now showing {searchResults.length} of {books.length}</span>
 			      	<button onClick={this.clearQuery}>Show all</button>
