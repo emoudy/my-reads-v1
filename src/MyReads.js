@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-// import ImageInput from './ImageInput'
-// import serializeForm from 'form-serialize'
- import { Link } from "react-router-dom";
- // 
+import { Link } from "react-router-dom";
 
 class MyReads extends Component {
   static propTypes = {
@@ -80,7 +77,6 @@ class MyReads extends Component {
                   </li>
                 ))}
               </ol>
-
             </div>
           )
         })}
