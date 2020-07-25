@@ -27,6 +27,7 @@ Should only require `npm install` and `npm start` to install and launch.
 
 ## License
 MyReads is free sofware and may be distributed for learning purposes.
+[License Agreement](https://github.com/emoudy/my-reads-v1/blob/master/LICENSE.txt)
 
 ## Information about the course in Udacity
 https://www.udacity.com/course/react-nanodegree--nd019
